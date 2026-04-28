@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fire Meme App</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #111;
+      overflow: hidden;
+    }
+
+    .fire {
+      font-size: 120px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    /* Bounce animation */
+    .bounce {
+      animation: bounce 0.5s;
+    }
+
+    @keyframes bounce {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.5) rotate(10deg); }
+      100% { transform: scale(1); }
+    }
+
+    /* Glow effect */
+    .glow {
+      text-shadow: 0 0 20px orange, 0 0 40px red;
+    }
+
+    /* Screen shake */
+    .shake {
+      animation: shake 0.3s;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0); }
+      25% { transform: translate(10px, -10px); }
+      50% { transform: translate(-10px, 10px); }
+      75% { transform: translate(10px, 10px); }
+      100% { transform: translate(0); }
+    }
+  </style>
+</head>
+
+<body id="body">
+
+  <div class="fire" id="fire">🔥</div>
+
+  <audio id="memeSound" src="meme.mp3"></audio>
+
+  <script>
+    const fire = document.getElementById("fire");
+    const body = document.getElementById("body");
+    const audio = document.getElementById("memeSound");
+
+    fire.addEventListener("click", () => {
+      // Sound
+      audio.currentTime = 0;
+      audio.play();
+
+      // Animation add
+      fire.classList.add("bounce", "glow");
+      body.classList.add("shake");
+
+      // Remove animation after done
+      setTimeout(() => {
+        fire.classList.remove("bounce", "glow");
+        body.classList.remove("shake");
+      }, 500);
+    });
+  </script>
+
+</body>
+</html>
